@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import re
 import os
+from initial_sentences import initial_sentences
 
 app = Flask(__name__)
 # Use SQLite for local development, PostgreSQL for production
@@ -20,6 +21,28 @@ def clean_text(text):
     text = re.sub(r"[^\w\s]", "", text)  # Remove punctuation
     return text
 
+# Database Model
+class Sentence(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    hindi = db.Column(db.Text, nullable=False)
+    english = db.Column(db.Text, nullable=False)
+
+# Initialize database with sample sentences
+def init_db():
+    with app.app_context():
+        db.create_all()
+        # Check if database is empty
+        if not Sentence.query.first():
+            # Add initial sentences
+            for sentence in initial_sentences:
+                new_sentence = Sentence(hindi=sentence["hindi"], english=sentence["english"])
+                db.session.add(new_sentence)
+            db.session.commit()
+            print("Database initialized with sample sentences")
+
+# Initialize the database
+init_db()
+
 @app.route("/check_answer", methods=["POST"])
 def check_answer():
     data = request.json
@@ -31,22 +54,6 @@ def check_answer():
         return jsonify({"status": "correct", "new_hindi": sentence.hindi, "new_answer": sentence.english})
     else:
         return jsonify({"status": "incorrect"})
-
-# Database Model
-class Sentence(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    hindi = db.Column(db.Text, nullable=False)
-    english = db.Column(db.Text, nullable=False)
-
-# Create DB
-with app.app_context():
-    db.create_all()
-
-# # Homepage: Show All Sentences
-# @app.route("/")
-# def index():
-#     sentences = Sentence.query.all()
-#     return render_template("index.html", sentences=sentences)
 
 # Homepage
 @app.route("/")
