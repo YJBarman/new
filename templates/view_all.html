@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Sentences - Language Learning</title>
+</head>
+<body>
+    <h1>All Sentences</h1>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+    <table>
+        <tr>
+            <th>Hindi</th>
+            <th>English</th>
+        </tr>
+        {% for sentence in sentences %}
+        <tr>
+            <td>{{ sentence.hindi }}</td>
+            <td>{{ sentence.english }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

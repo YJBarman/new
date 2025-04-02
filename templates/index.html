@@ -1,0 +1,47 @@
+app\new\templates\index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Learning</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h1 class="text-center text-primary mb-5">Hindi - English Learning App</h1>
+        
+        <div class="row justify-content-center g-4">
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">📚 View All Sentences</h5>
+                        <p class="card-text">Browse through all available Hindi-English sentence pairs.</p>
+                        <a href="{{ url_for('view_all') }}" class="btn btn-primary">View Sentences</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">➕ Add New Sentence</h5>
+                        <p class="card-text">Contribute by adding new sentence pairs to the collection.</p>
+                        <a href="{{ url_for('add_sentence') }}" class="btn btn-success">Add Sentence</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">📝 Practice Mode</h5>
+                        <p class="card-text">Test your translation skills in practice mode.</p>
+                        <a href="{{ url_for('practice') }}" class="btn btn-warning">Start Practice</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

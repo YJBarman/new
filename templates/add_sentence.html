@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Sentence</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Add a New Sentence</h1>
+
+        <div class="card shadow-sm p-4 bg-white">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Hindi Sentence:</label>
+                    <input type="text" name="hindi" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">English Sentence:</label>
+                    <input type="text" name="english" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">✅ Add Sentence</button>
+            </form>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">⬅ Back to Home</a>
+        </div>
+    </div>
+</body>
+
+</html>
